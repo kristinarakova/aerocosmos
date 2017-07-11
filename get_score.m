@@ -3,6 +3,8 @@ function score = get_score(image, metric_names)
 image_aero_path = 'C:\Users\k.rakova\Desktop\Ракова Кристина\M4\M4_1\Тестирование\test\';
 addpath(image_aero_path);
 
+% Комментарий для гитхаба
+
 % home = 'C:\Users\Кристина\Desktop\Учеба\АЭРОКОСМОС\M4_1\M4_1';
 % home1 = 'C:\Users\Кристина\Desktop\Учеба\АЭРОКОСМОС\M4_1\home\home\';
 % addpath(home);
