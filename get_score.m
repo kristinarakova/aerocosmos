@@ -3,15 +3,13 @@ function score = get_score(image, metric_names)
 image_aero_path = 'C:\Users\k.rakova\Desktop\Ракова Кристина\M4\M4_1\Тестирование\test\';
 addpath(image_aero_path);
 
-% Комментарий для гитхаба
-
 % home = 'C:\Users\Кристина\Desktop\Учеба\АЭРОКОСМОС\M4_1\M4_1';
 % home1 = 'C:\Users\Кристина\Desktop\Учеба\АЭРОКОСМОС\M4_1\home\home\';
 % addpath(home);
 % addpath(home1);
-
+%-------------------------------------------------------------------------
 %ДЛЯ 8-МИ КАНАЛЬНОГО
-% %-------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 % image_path = [image_aero_path image];
 % input_metric_list = metric_names;
 % addpath(image_path)
@@ -24,49 +22,39 @@ addpath(image_aero_path);
 % EtalonIm_3(:,:,2)=EtalonIm_8(:,:,3);
 % EtalonIm_3(:,:,3)=EtalonIm_8(:,:,2);
 %-------------------------------------------------------------------------
-
 % ДЛЯ КАЖДОГО КАНАЛА ОТДЕЛЬНО
-%-------------------------------------------------------------------------
-% image_path = [image_aero_path image];
-% input_metric_list = metric_names;
-% addpath(image_path)
-% 
-% pan_image = im2single(imread('pan.tif'));
-% [H W C] = size(pan_image);
-% 
-% EtalonIm_big = zeros(H, W, 3, 'single');
-% EtalonIm_big(:,:,1) = im2single(imread('5.tif'));
-% EtalonIm_big(:,:,2) = im2single(imread('3.tif'));
-% EtalonIm_big(:,:,3) = im2single(imread('2.tif'));
-% 
-% [H W C] = size(pan_image); 
-% EtalonIm_3 = imresize(EtalonIm_big, [H/4 W/4], 'bilinear');
-% [h w c] = size(EtalonIm_3);
-
-% --------------------------------------------------------------------------
-
-% ДЛЯ КАЖДОГО КАНАЛА ОТДЕЛЬНО Moscow
 %-------------------------------------------------------------------------
 image_path = [image_aero_path image];
 input_metric_list = metric_names;
 addpath(image_path)
 
-pan_image = im2single(imread('pan.tif'));
-r = im2single(imread('5.tif'));
-g = im2single(imread('3.tif'));
-b = im2single(imread('2.tif'));
-[H W] = size (r);
+pan_image = im2single(imread('pan.tiff'));
+[H W C] = size(pan_image);
 
-EtalonIm_3 = zeros(H, W, 3, 'single');
-EtalonIm_3(:,:,1) = im2single(imread('5.tif'));
-EtalonIm_3(:,:,2) = im2single(imread('3.tif'));
-EtalonIm_3(:,:,3) = im2single(imread('2.tif'));
+EtalonIm_big = zeros(H, W, 3, 'single');
+EtalonIm_big(:,:,1) = im2single(imread('r.tiff'));
+EtalonIm_big(:,:,2) = im2single(imread('g.tiff'));
+EtalonIm_big(:,:,3) = im2single(imread('b.tiff'));
 
+[H W C] = size(pan_image); 
+EtalonIm_3 = imresize(EtalonIm_big, [H/3 W/3], 'bilinear');
 [h w c] = size(EtalonIm_3);
-
+% --------------------------------------------------------------------------
+% ДЛЯ КАЖДОГО КАНАЛА ОТДЕЛЬНО Moscow
+%-------------------------------------------------------------------------
+% image_path = [image_aero_path image];
+% input_metric_list = metric_names;
+% addpath(image_path)
+% 
+% pan_image = im2single(imread('0.tif'));
+% EtalonIm_3(:,:,1) = im2single(imread('5.tif'));
+% EtalonIm_3(:,:,2) = im2single(imread('3.tif'));
+% EtalonIm_3(:,:,3) = im2single(imread('2.tif'));
+% 
+% [h w c] = size(EtalonIm_3);
 % --------------------------------------------------------------------------
 
-multi_image = imresize(EtalonIm_3, [h/8 w/8], 'bilinear'); 
+multi_image = imresize(EtalonIm_3, [h/2 w/2], 'bilinear'); 
 
 [H1 W1 C1] = size(multi_image);
 [H W C] = size(pan_image);
@@ -83,8 +71,8 @@ metrics_lib_path = '.\metrics\';
 addpath(metrics_lib_path);
 
 exp_const_interval=1000;
-kernel_size_interval=145;%по нечетным 
-trim_by_interval=170;
+kernel_size_interval=15;%по нечетным 
+trim_by_interval=0;
 
 metric_params = H1/H;
 
