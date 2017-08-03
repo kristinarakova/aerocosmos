@@ -168,23 +168,20 @@ else
                 metric_values{i} = SAM;
                 metric_names{i} = 'SAM';
                 
+                           
             case    'SAM_simple'
                 [h w c]=size(I_1);
                 sum=0;
+                a=zeros(1,c);
+                b=zeros(1,c);
                 for k=1:h
                     for j=1:w
-                    a=zeros(1,3);
-                    b=zeros(1,3);
-                    a(1) = I_1(k,j,1);
-                    a(2) = I_1(k,j,2);
-                    a(3) = I_1(k,j,3);
-                    
-                    b(1) = I_2(k,j,1);
-                    b(2) = I_2(k,j,2);
-                    b(3) = I_2(k,j,3); 
-                    
-                    n1 = norm(a(:), 2);
-                    n2 = norm(b(:), 2);
+                        for l=1:c
+                    a(l) = I_1(k,j,l);
+                    b(l) = I_2(k,j,l);              
+                        end
+                        n1 = norm(a(:), 2);
+                        n2 = norm(b(:), 2);
                         if a==0|b==0
                         sum=sum+0;
                         else    
@@ -192,10 +189,10 @@ else
                         end
                     end  
                 end  
+                
                 SAM_simple = sum/(h*w);
                 metric_values{i} = SAM_simple;
                 metric_names{i} = 'SAM_simple';
-                
             case 'ERGAS_simple'
                 
                 [h w c]=size(I_1);
