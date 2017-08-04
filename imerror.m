@@ -172,8 +172,6 @@ else
             case    'SAM_simple'
                 [h w c]=size(I_1);
                 sum=0;
-                a=zeros(1,c);
-                b=zeros(1,c);
                 for k=1:h
                     for j=1:w
                         for l=1:c
